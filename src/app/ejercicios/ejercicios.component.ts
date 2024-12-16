@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ITableColumn } from '../models/table-column.model';
 import { AppTableComponent } from '../components/app-table/app-table.component';
 import { GrupoMuscular, IEjercicio } from '../models/ejercicio.model';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-ejercicios',
-  imports: [ CommonModule, AppTableComponent ],
+  imports: [ CommonModule, AppTableComponent, RouterModule ],
   templateUrl: './ejercicios.component.html',
   styleUrl: './ejercicios.component.css'
 })
