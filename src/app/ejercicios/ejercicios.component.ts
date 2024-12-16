@@ -1,51 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { ITableColumn } from '../models/table-column.model';
+import { AppTableComponent } from '../components/app-table/app-table.component';
+import { GrupoMuscular, IEjercicio } from '../models/ejercicio.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ejercicios',
-  imports: [ CommonModule, FontAwesomeModule ],
+  imports: [ CommonModule, AppTableComponent ],
   templateUrl: './ejercicios.component.html',
   styleUrl: './ejercicios.component.css'
 })
 
 export class EjerciciosComponent implements OnInit {
 
-  faPencil = faPencil
-  ejerciciosList: Ejercicio[] = []
+  ejerciciosList: IEjercicio[] = []
+  tableColumns: ITableColumn[] = [
+    { field: "name", header: "Name" },
+    { field: "description", header: "Description" },
+    { field: "group", header: "Group" },
+  ]
+
+  private _router = inject(Router)
 
   ngOnInit() {
     this.ejerciciosList = [
       {
+        id: 1,
         name: "Press banca",
         description: "Ejercicio básico de pectoral",
         group: GrupoMuscular.Pectoral
       },
       {
+        id: 2,
         name: "Jalón al pecho",
         description: "Ejercicio enfocado en la zona del trapecio",
         group: GrupoMuscular.Espalda
       }
     ]
   }
-}
-
-export interface Ejercicio {
-  name: string,
-  description?: string,
-  group: GrupoMuscular
-}
-
-export enum GrupoMuscular {
-  Espalda,
-  Pectoral,
-  Hombro,
-  Bíceps,
-  Tríceps,
-  Antebrazo,
-  Cuadriceps,
-  Femoral,
-  Gluteo,
-  Gemelo
+  
+  goToEjercicioDetails(id: number): void {
+    this._router.navigate([`/ejercicios/${id}`])
+  }
 }

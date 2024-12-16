@@ -1,16 +1,4 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Nombre</th>
-      <th scope="col">Descripción</th>
-      <th scope="col">Acción</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let ejercicio of ejerciciosList">
-      <td>{{ ejercicio.name }}</td>
-      <td>{{ ejercicio.description }}</td>
-      <td><fa-icon [icon]="faPencil"></fa-icon></td>
-    </tr>
-  </tbody>
-</table>
+<app-table [columns]="tableColumns" 
+  [data]="ejerciciosList"
+  (goToDetails)="goToEjercicioDetails($event)"
+/>

@@ -1,21 +1,20 @@
 <table class="table table-hover">
     <thead>
       <tr>
-        <th *ngFor="let column of columns">{{ column.header }}</th>
-        <th *ngIf="actions.length > 0">Actions</th>
+        @for (column of columns; track column.header) {
+          <th>{{ column.header }}</th>
+        }
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of data">
-        <td *ngFor="let column of columns">{{ row[column.field] }}</td>
-        <td *ngIf="actions.length > 0">
-          <button 
-            *ngFor="let action of actions"
-            [ngClass]="action.class"
-            (click)="onAction(action.name, row)">
-            {{ action.label }}
-          </button>
-        </td>
-      </tr>
+      @for (row of data; track row.id) {
+        <tr>
+          @for (column of columns; track column.header) {
+            <td>{{ row[column.field] }}</td>
+          }
+          <td><fa-icon [icon]="faPencil" (click)="onGoToDetails(row['id'])"></fa-icon></td>
+        </tr>
+      }
     </tbody>
 </table>
