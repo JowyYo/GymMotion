@@ -1,1 +1,4 @@
-<p>ejercicios works!</p>
+<app-table [columns]="tableColumns" 
+  [data]="ejerciciosList"
+  (goToDetails)="goToEjercicioDetails($event)"
+/>

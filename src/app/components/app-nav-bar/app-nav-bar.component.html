@@ -1,15 +1,13 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
       <a class="nav-link"
-        [ngClass]="{active: isActivePage('entrenamientos')}"
-        (click)="setActivePage('entrenamientos')"
+        [ngClass]="{active: isActivePage('')}"
         aria-current="page"
         [routerLink]="['/']" routerLinkActive="router-link-active">Entrenamientos</a>
     </li>
     <li class="nav-item">
       <a class="nav-link"
         [ngClass]="{active: isActivePage('ejercicios')}"
-        (click)="setActivePage('ejercicios')"
         aria-current="page"
         [routerLink]="['/ejercicios']" routerLinkActive="router-link-active" >Ejercicios</a>
     </li>
