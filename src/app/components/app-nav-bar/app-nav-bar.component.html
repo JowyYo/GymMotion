@@ -2,14 +2,17 @@
     <li class="nav-item">
       <a class="nav-link"
         [ngClass]="{active: isActivePage('')}"
-        aria-current="page"
-        [routerLink]="['/']" routerLinkActive="router-link-active">Entrenamientos</a>
+        [routerLink]="['/']">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"
+        [ngClass]="{active: isActivePage('')}"
+        [routerLink]="['/entrenamientos']">Entrenamientos</a>
     </li>
     <li class="nav-item">
       <a class="nav-link"
         [ngClass]="{active: isActivePage('ejercicios')}"
-        aria-current="page"
-        [routerLink]="['/ejercicios']" routerLinkActive="router-link-active" >Ejercicios</a>
+        [routerLink]="['/ejercicios']">Ejercicios</a>
     </li>
     <!--<li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
