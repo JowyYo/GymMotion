@@ -28,8 +28,4 @@ export class AppNavBarComponent implements OnInit, OnDestroy {
     if (this.routerSubscription)
       this.routerSubscription.unsubscribe();
   }
-  
-  isActivePage(pageName: string): boolean {
-    return pageName == this.activePage
-  }
 }

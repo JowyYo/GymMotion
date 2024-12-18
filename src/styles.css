@@ -178,3 +178,7 @@ main {
 .float-right {
     float: right;
 }
+
+.text-danger {
+    color: red;
+}

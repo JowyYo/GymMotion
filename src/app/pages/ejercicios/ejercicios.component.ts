@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ITableColumn } from '../models/table-column.model';
-import { AppTableComponent } from '../components/app-table/app-table.component';
-import { GrupoMuscular, IEjercicio } from '../models/ejercicio.model';
+import { ITableColumn } from '../../models/table-column.model';
+import { AppTableComponent } from '../../components/app-table/app-table.component';
+import { GrupoMuscular, IEjercicio } from '../../models/ejercicio.model';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
