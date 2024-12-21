@@ -46,7 +46,7 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 			this.paramsSubscription.unsubscribe();
 	}
 
-	guardar() {
+	save() {
 		console.log(this.ejercicioForm?.value)
 	}
 
