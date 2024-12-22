@@ -1,5 +1,5 @@
 export interface IEjercicio {
-    id: number,
+    id: string,
     name: string,
     description?: string,
     group: GrupoMuscular
