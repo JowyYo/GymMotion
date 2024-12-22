@@ -1,0 +1,11 @@
+<div class="row align-center">
+	<h2 class="col-10">Entrenamientos</h2>
+	<div class="col-2">
+		<button class="btn btn-primary float-right" [routerLink]="['/entrenamientos/new']">Añadir entrenamiento</button>
+	</div>
+</div>
+
+<app-table [columns]="tableColumns" 
+  [data]="entrenamientosList"
+  (goToDetails)="goToEntrenamientoDetails($event)"
+/>

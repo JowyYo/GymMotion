@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "a7UcHGljSmXu3t3e31g7LXm1aM+cIVg+tXxLc6xoTs0=",
+  "Source": "GymMotion.Service",
+  "BasePath": "_content/GymMotion.Service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

@@ -1,0 +1,13 @@
+<form [formGroup]="ejercicioFormGroup" class="row g-3 needs-validation">
+    <div class="mb-3">
+        <label for="objetivoRepeticiones" class="form-label">Número de repeticiones objetivo *</label>
+        <input type="number" 
+          [ngClass]="{'is-invalid': hasErrors('objetivoRepeticiones', 'required')}"
+          class="form-control" 
+          id="objetivoRepeticiones" 
+          formControlName="objetivoRepeticiones">
+        @if (hasErrors('objetivoRepeticiones', 'required')){
+          <span class="text-danger">Número de repeticiones objetivo es obligatorio</span>
+        }
+    </div>  
+</form>

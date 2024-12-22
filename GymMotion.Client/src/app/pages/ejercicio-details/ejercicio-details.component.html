@@ -1,0 +1,37 @@
+<div class="container">
+  <form [formGroup]="ejercicioForm" class="row g-3 needs-validation" (submit)="save()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre *</label>
+      <input type="text" 
+        [ngClass]="{'is-invalid': hasErrors('name', 'required')}"
+        class="form-control" 
+        id="name" 
+        formControlName="name">
+      @if (hasErrors('name', 'required')){
+        <span class="text-danger">Nombre es obligatorio</span>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripción</label>
+      <textarea class="form-control"
+       id="description" 
+       formControlName="description"></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="group">Grupo muscular *</label>
+      <select class="form-select" 
+        [ngClass]="{'is-invalid': hasErrors('group', 'required')}"
+        name="group" 
+        id="group" 
+        formControlName="group">
+        @for (grupo of gruposMuscular; track grupo) {
+          <option [value]="grupo">{{ grupo }}</option>
+        }
+      </select>
+      @if (hasErrors('group', 'required')){
+        <span class="text-danger">Nombre es obligatorio</span>
+      }
+    </div>
+    <button type="submit" class="btn btn-primary float-right">Guardar</button>
+  </form>
+</div>
