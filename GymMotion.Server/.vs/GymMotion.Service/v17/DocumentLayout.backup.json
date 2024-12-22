@@ -1,0 +1,133 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Code\\GymMotion.Service\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|c:\\code\\gymmotion.service\\gymmotion.service.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|solutionrelative:gymmotion.service.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|c:\\code\\gymmotion.service\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|c:\\code\\gymmotion.service\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|c:\\code\\gymmotion.service\\infrastructure\\controllers\\ejercicioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|solutionrelative:infrastructure\\controllers\\ejercicioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|c:\\code\\gymmotion.service\\infrastructure\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|solutionrelative:infrastructure\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|c:\\code\\gymmotion.service\\domain\\entities\\ejercicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|solutionrelative:domain\\entities\\ejercicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|c:\\code\\gymmotion.service\\domain\\entities\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1637751-112B-441F-B3FB-C75CA749405C}|GymMotion.Service.csproj|solutionrelative:domain\\entities\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EjerciciosController.cs",
+              "DocumentMoniker": "C:\\Code\\GymMotion.Service\\Infrastructure\\Controllers\\EjerciciosController.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Controllers\\EjerciciosController.cs",
+              "ToolTip": "C:\\Code\\GymMotion.Service\\Infrastructure\\Controllers\\EjerciciosController.cs",
+              "RelativeToolTip": "Infrastructure\\Controllers\\EjerciciosController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-22T09:14:57.087Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Code\\GymMotion.Service\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Code\\GymMotion.Service\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-22T09:15:01.54Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GymMotion.Service.http",
+              "DocumentMoniker": "C:\\Code\\GymMotion.Service\\GymMotion.Service.http",
+              "RelativeDocumentMoniker": "GymMotion.Service.http",
+              "ToolTip": "C:\\Code\\GymMotion.Service\\GymMotion.Service.http",
+              "RelativeToolTip": "GymMotion.Service.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-12-22T09:15:24.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Code\\GymMotion.Service\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Code\\GymMotion.Service\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAB3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-22T09:22:26.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Code\\GymMotion.Service\\Infrastructure\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Code\\GymMotion.Service\\Infrastructure\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Infrastructure\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-22T09:28:31.184Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "C:\\Code\\GymMotion.Service\\Domain\\Entities\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\BaseEntity.cs",
+              "ToolTip": "C:\\Code\\GymMotion.Service\\Domain\\Entities\\BaseEntity.cs",
+              "RelativeToolTip": "Domain\\Entities\\BaseEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-22T09:25:39.505Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Ejercicio.cs",
+              "DocumentMoniker": "C:\\Code\\GymMotion.Service\\Domain\\Entities\\Ejercicio.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Ejercicio.cs",
+              "ToolTip": "C:\\Code\\GymMotion.Service\\Domain\\Entities\\Ejercicio.cs",
+              "RelativeToolTip": "Domain\\Entities\\Ejercicio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-22T09:25:10.201Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

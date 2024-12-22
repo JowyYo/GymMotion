@@ -1,0 +1,6 @@
+@GymMotion.Service_HostAddress = http://localhost:5055
+
+GET {{GymMotion.Service_HostAddress}}/api/ejercicios/
+Accept: application/json
+
+###

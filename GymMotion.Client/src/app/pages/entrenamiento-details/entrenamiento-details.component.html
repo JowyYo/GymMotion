@@ -1,0 +1,28 @@
+<div class="container">
+    <form [formGroup]="entrenamientoForm" class="row g-3 needs-validation" (submit)="save()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre *</label>
+        <input type="text" 
+          [ngClass]="{'is-invalid': hasErrors('name', 'required')}"
+          class="form-control" 
+          id="name" 
+          formControlName="name">
+        @if (hasErrors('name', 'required')){
+          <span class="text-danger">Nombre es obligatorio</span>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea class="form-control"
+         id="description" 
+         formControlName="description"></textarea>
+      </div>
+      <div formArrayName="ejercicios">
+        <div *ngFor="let ejercicio of ejercicios.controls; let i = index">
+          <app-ejercicio-container [ejercicioForm]="ejercicio"></app-ejercicio-container>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary float-right" (click)="addEjercicio()">Añadir ejercicio</button>
+      <button type="submit" class="btn btn-primary float-right">Guardar</button>
+    </form>
+  </div>
