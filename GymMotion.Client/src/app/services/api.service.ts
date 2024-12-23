@@ -30,7 +30,7 @@ export class ApiService {
 		return this._http.put(`${this.baseUrl}/${path}/${id}`, entity);
 	}
 
-	delete(path: string, id: string): void {
-		this._http.delete(`${this.baseUrl}/${path}/${id}`);
+	delete(path: string, id: string): Observable<any> {
+		return this._http.delete(`${this.baseUrl}/${path}/${id}`);
 	}
 }

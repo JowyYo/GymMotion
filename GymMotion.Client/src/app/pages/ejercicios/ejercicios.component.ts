@@ -62,6 +62,10 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 
 	confirmDeleteEjercicio() {
 		console.log("confirmar eliminar ejercicio")
-		this._apiService.delete("ejercicios", this.ejercicioToDelete!);
+		this._apiService.delete("ejercicios", this.ejercicioToDelete!)
+			.subscribe(
+				() => { window.location.reload() },
+				error => { console.log(error) }
+			);
 	}
 }
