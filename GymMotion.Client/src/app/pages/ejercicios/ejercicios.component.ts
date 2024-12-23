@@ -8,10 +8,11 @@ import { ApiService } from '../../services/api.service';
 import { Subscription } from 'rxjs';
 import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
 import { AppModalComponent } from '../../components/app-modal/app-modal.component';
+import { AppAlertComponent } from '../../components/app-alert/app-alert.component';
 
 @Component({
   selector: 'app-ejercicios',
-  imports: [ CommonModule, AppTableComponent, RouterModule, PageLoadingComponent, AppModalComponent ],
+  imports: [ CommonModule, AppTableComponent, RouterModule, PageLoadingComponent, AppModalComponent, AppAlertComponent ],
   templateUrl: './ejercicios.component.html',
   styleUrl: './ejercicios.component.css'
 })
@@ -28,6 +29,9 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 	apiSuscription?: Subscription;
 	isLoading: boolean = false;
 	ejercicioToDelete?: string;
+	alertType: string = "success";
+	alertMessage: string = "Se ha guardado correctamente";
+	showAlert: boolean = false;
 
 	private _router = inject(Router);
 	private _apiService = inject(ApiService);
@@ -64,8 +68,14 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 		console.log("confirmar eliminar ejercicio")
 		this._apiService.delete("ejercicios", this.ejercicioToDelete!)
 			.subscribe(
-				() => { window.location.reload() },
-				error => { console.log(error) }
+				() => { 
+					window.location.reload();
+				},
+				error => { 
+					this.showAlert = true;
+					this.alertType = "danger";
+					this.alertMessage = error.message;
+				}
 			);
 	}
 }

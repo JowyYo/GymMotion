@@ -1,3 +1,7 @@
+@if (showAlert) {
+	<app-alert [alertType]="alertType" [message]="alertMessage" (onCloseAlert)="showAlert = false"/>
+}
+
 <div class="row align-center">
 	<h2 class="col-10">Ejercicios</h2>
 	<div class="col-2">
@@ -13,4 +17,4 @@
 
 <app-page-loading [isLoading]="isLoading" />
 
-<app-modal [text]="'¿Está seguro/a que desea eliminar este ejercicio?'" (onConfirmModal)="confirmDeleteEjercicio()" />
+<app-modal [title]="'Eliminar ejercicio'" [text]="'¿Está seguro/a que desea eliminar este ejercicio?'" (onConfirmModal)="confirmDeleteEjercicio()" />

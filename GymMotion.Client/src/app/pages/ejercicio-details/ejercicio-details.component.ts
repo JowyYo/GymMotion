@@ -8,10 +8,11 @@ import { ApiService } from '../../services/api.service';
 import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AppAlertComponent } from '../../components/app-alert/app-alert.component';
 
 @Component({
 	selector: 'app-ejercicio-details',
-	imports: [ ReactiveFormsModule, CommonModule, PageLoadingComponent, FontAwesomeModule ],
+	imports: [ ReactiveFormsModule, CommonModule, PageLoadingComponent, FontAwesomeModule, AppAlertComponent ],
 	templateUrl: './ejercicio-details.component.html',
 	styleUrl: './ejercicio-details.component.css'
 })
@@ -26,6 +27,10 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 		.map(([key, value]) => ({ id: value as number, name: key }));;
 	isLoading: boolean = false;
 	ejercicioId?: string;
+	
+	alertType: string = "";
+	alertMessage: string = "";
+	showAlert: boolean = false;
 
 	private _activatedRouter = inject(ActivatedRoute);
 	private _router = inject(Router);
@@ -78,10 +83,16 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 		this._apiService.add('ejercicios', this.ejercicioForm?.value)
 			.subscribe(
 				data => {
-					console.log("success", data)
+					this._router.navigate([`ejercicios/${data.id}`])
+					this.showAlert = true;
+					this.alertType = "success";
+					this.alertMessage = "Se ha guardado el ejercicio correctamente.";
+					setTimeout(() => { this.showAlert = false; }, 1500);
 				},
 				error => {
-					console.log("error", error)
+					this.showAlert = true;
+					this.alertType = "danger";
+					this.alertMessage = error.message;
 				}
 			)
 	}
@@ -90,10 +101,15 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 		this._apiService.update('ejercicios', this.ejercicioId!, this.ejercicioForm?.value)
 			.subscribe(
 				data => {
-					console.log("success", data)
+					this.showAlert = true;
+					this.alertType = "success";
+					this.alertMessage = "Se ha guardado el ejercicio correctamente.";
+					setTimeout(() => { this.showAlert = false; }, 1500);
 				},
 				error => {
-					console.log("error", error)
+					this.showAlert = true;
+					this.alertType = "danger";
+					this.alertMessage = error.message;
 				}
 			)
 	}
