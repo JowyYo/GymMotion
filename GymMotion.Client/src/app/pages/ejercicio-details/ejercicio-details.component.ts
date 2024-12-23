@@ -21,7 +21,9 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	ejercicioForm!: FormGroup;
 	paramsSubscription: Subscription = new Subscription();
 	apiServiceSubscription?: Subscription
-	gruposMuscular = Object.values(GrupoMuscular);
+	gruposMuscular = Object.entries(GrupoMuscular)
+		.filter(([key, value]) => isNaN(Number(key)))
+		.map(([key, value]) => ({ id: value as number, name: key }));;
 	isLoading: boolean = false;
 	ejercicioId?: string;
 

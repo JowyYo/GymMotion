@@ -28,8 +28,8 @@
 				name="group" 
 				id="group" 
 				formControlName="group">
-				@for (grupo of gruposMuscular; track grupo) {
-				<option [value]="grupo">{{ grupo }}</option>
+				@for (grupo of gruposMuscular; track grupo.id) {
+				<option [value]="grupo.id">{{ grupo.name }}</option>
 				}
 			</select>
 			@if (hasErrors('group', 'required')){

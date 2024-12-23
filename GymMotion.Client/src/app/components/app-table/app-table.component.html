@@ -4,14 +4,14 @@
 			@for (column of columns; track column.header) {
 				<th>{{ column.header }}</th>
 			}
-			<th>Actions</th>
+			<th>Acciones</th>
 		</tr>
 	</thead>
 	<tbody>
 		@for (row of data; track row.id) {
 			<tr>
 				@for (column of columns; track column.header) {
-					<td>{{ row[column.field] }}</td>
+					<td>{{ getColumnValue(row[column.field]) }}</td>
 				}
 				<td>
 					<fa-icon [icon]="faPencil" (click)="onGoToDetails(row['id'])"></fa-icon>
