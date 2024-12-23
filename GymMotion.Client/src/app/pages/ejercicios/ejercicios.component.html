@@ -12,3 +12,5 @@
 />
 
 <app-page-loading [isLoading]="isLoading" />
+
+<app-modal [text]="'¿Está seguro/a que desea eliminar este ejercicio?'" (onConfirmModal)="confirmDeleteEjercicio()" />

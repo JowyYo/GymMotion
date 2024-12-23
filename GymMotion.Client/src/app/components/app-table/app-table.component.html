@@ -4,18 +4,19 @@
 			@for (column of columns; track column.header) {
 				<th>{{ column.header }}</th>
 			}
-			<th>Acciones</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		@for (row of data; track row.id) {
-			<tr>
+			<tr (click)="onGoToDetails(row['id'])">
 				@for (column of columns; track column.header) {
 					<td>{{ getColumnValue(row[column.field]) }}</td>
 				}
 				<td>
-					<fa-icon [icon]="faPencil" (click)="onGoToDetails(row['id'])"></fa-icon>
-					<fa-icon [icon]="faTrash" class="margin-left-10" (click)="onDeleteRegister(row['id'])"></fa-icon>
+					<fa-icon [icon]="faTrash"
+						class="margin-left-10"
+						(click)="onDeleteRegister($event, row['id'])" />
 				</td>
 			</tr>
 		}

@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ITableColumn } from '../../models/table-column.model';
 import { AppTableComponent } from '../../components/app-table/app-table.component';
@@ -7,15 +7,17 @@ import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { Subscription } from 'rxjs';
 import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
+import { AppModalComponent } from '../../components/app-modal/app-modal.component';
 
 @Component({
   selector: 'app-ejercicios',
-  imports: [ CommonModule, AppTableComponent, RouterModule, PageLoadingComponent ],
+  imports: [ CommonModule, AppTableComponent, RouterModule, PageLoadingComponent, AppModalComponent ],
   templateUrl: './ejercicios.component.html',
   styleUrl: './ejercicios.component.css'
 })
 
 export class EjerciciosComponent implements OnInit, OnDestroy {
+	@ViewChild(AppModalComponent) appModalComponent!: AppModalComponent
 
 	ejerciciosList: IEjercicio[] = []
 	tableColumns: ITableColumn[] = [
@@ -25,6 +27,7 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 	]
 	apiSuscription?: Subscription;
 	isLoading: boolean = false;
+	ejercicioToDelete?: string;
 
 	private _router = inject(Router);
 	private _apiService = inject(ApiService);
@@ -53,6 +56,12 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 	}
 
 	deleteEjercicio(id: string) {
-		
+		this.ejercicioToDelete = id;
+		this.appModalComponent.openModal();
+	}
+
+	confirmDeleteEjercicio() {
+		console.log("confirmar eliminar ejercicio")
+		this._apiService.delete("ejercicios", this.ejercicioToDelete!);
 	}
 }

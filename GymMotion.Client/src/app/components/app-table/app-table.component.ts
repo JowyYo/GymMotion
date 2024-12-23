@@ -47,7 +47,8 @@ export class AppTableComponent {
 		this.goToDetails.emit(id)
 	}
 
-	onDeleteRegister(id: string) {
+	onDeleteRegister(event: Event, id: string) {
+		event.stopPropagation();
 		this.deleteRegister.emit(id);
 	}
 }

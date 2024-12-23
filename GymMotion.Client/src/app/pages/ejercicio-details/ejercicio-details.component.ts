@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
-import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -16,7 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 	styleUrl: './ejercicio-details.component.css'
 })
 export class EjercicioDetailsComponent implements OnInit, OnDestroy {
-	faCircleArrowLeft = faCircleArrowLeft;
+	faArrowLeft = faArrowLeft;
 
 	ejercicioForm!: FormGroup;
 	paramsSubscription: Subscription = new Subscription();

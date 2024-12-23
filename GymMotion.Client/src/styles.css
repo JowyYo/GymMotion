@@ -190,3 +190,18 @@ main {
 fa-icon {
     cursor: pointer;
 }
+
+.buttons-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.buttons-header > fa-icon {
+    font-size: 20px;
+}
+
+.buttons-header > button {
+    position: absolute;
+    right: 0;
+}
