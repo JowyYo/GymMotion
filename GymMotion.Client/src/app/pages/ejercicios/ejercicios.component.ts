@@ -4,13 +4,13 @@ import { ITableColumn } from '../../models/table-column.model';
 import { AppTableComponent } from '../../components/app-table/app-table.component';
 import { IEjercicio } from '../../models/ejercicio.model';
 import { Router, RouterModule } from '@angular/router';
-import { EjercicioApiService } from '../../services/ejercicio-api.service';
+import { ApiService } from '../../services/api.service';
 import { Subscription } from 'rxjs';
-import { HttpClientModule } from '@angular/common/http';
+import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
 
 @Component({
   selector: 'app-ejercicios',
-  imports: [ CommonModule, AppTableComponent, RouterModule, HttpClientModule ],
+  imports: [ CommonModule, AppTableComponent, RouterModule, PageLoadingComponent ],
   templateUrl: './ejercicios.component.html',
   styleUrl: './ejercicios.component.css'
 })
@@ -24,17 +24,21 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 		{ field: "group", header: "Group" },
 	]
 	apiSuscription?: Subscription;
+	isLoading: boolean = false;
 
 	private _router = inject(Router);
-	private _apiService = inject(EjercicioApiService);
+	private _apiService = inject(ApiService);
 
 	ngOnInit() {
-		this.apiSuscription = this._apiService.getAll().subscribe(
+		this.isLoading = true;
+		this.apiSuscription = this._apiService.getAll("ejercicios").subscribe(
 			(result) => {
 				this.ejerciciosList = result;
+				this.isLoading = false;
 			},
 			(error) => {
 				console.log(error)
+				this.isLoading = false;
 			}
 		);
 	}
@@ -44,7 +48,11 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 			this.apiSuscription.unsubscribe();
 	}
 	
-	goToEjercicioDetails(id: number): void {
+	goToEjercicioDetails(id: string): void {
 		this._router.navigate([`/ejercicios/${id}`])
+	}
+
+	deleteEjercicio(id: string) {
+		
 	}
 }

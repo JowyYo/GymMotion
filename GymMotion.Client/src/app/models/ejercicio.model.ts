@@ -6,14 +6,14 @@ export interface IEjercicio {
   }
   
   export enum GrupoMuscular {
-    Espalda = "Espalda",
-    Pectoral = "Pectoral",
-    Hombro = "Hombro",
-    Bíceps = "Bíceps",
-    Tríceps = "Tríceps",
-    Antebrazo = "Antebrazo",
-    Cuadriceps = "Cuadriceps",
-    Femoral = "Femoral",
-    Gluteo = "Gluteo",
-    Gemelo = "Gemelo"
+    Espalda,
+    Pectoral,
+    Hombro,
+    Bíceps,
+    Tríceps,
+    Antebrazo,
+    Cuadriceps,
+    Femoral,
+    Gluteo,
+    Gemelo
   }

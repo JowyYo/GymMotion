@@ -8,4 +8,7 @@
 <app-table [columns]="tableColumns" 
   [data]="ejerciciosList"
   (goToDetails)="goToEjercicioDetails($event)"
+  (deleteRegister)="deleteEjercicio($event)"
 />
+
+<app-page-loading [isLoading]="isLoading" />

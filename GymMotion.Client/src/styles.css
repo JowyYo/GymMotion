@@ -182,3 +182,11 @@ main {
 .text-danger {
     color: red;
 }
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+fa-icon {
+    cursor: pointer;
+}
