@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			@for (column of columns; track column.header) {
-				<th>{{ column.header }}</th>
+				<th [ngStyle]="{ 'width': column.widthPercentage + '%' }">{{ column.header }}</th>
 			}
 			<th></th>
 		</tr>

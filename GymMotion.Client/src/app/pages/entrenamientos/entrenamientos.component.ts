@@ -16,8 +16,8 @@ export class EntrenamientosComponent {
 
 	entrenamientosList: IEntrenamientoList[] = []
 	tableColumns: ITableColumn[] = [
-		{ field: "name", header: "Name" },
-		{ field: "description", header: "Description" }
+		{ field: "name", header: "Name", widthPercentage: 45 },
+		{ field: "description", header: "Description", widthPercentage: 45 }
 	]
 
 	private _router = inject(Router)

@@ -9,7 +9,7 @@ import { Component, computed, EventEmitter, Input, input, Output } from '@angula
 export class AppPaginationComponent {
 
 	firstPageItem = computed(() => this.currentPage() > 1 ? ((this.currentPage() - 1) * this.pageSize + 1) : 1);
-	lastPageItem = computed(() => this.firstPageItem() + this.pageSize - 1);
+	lastPageItem = computed(() => this.totalPages == this.currentPage() ? this.totalItems : this.firstPageItem() + this.pageSize - 1);
 	currentPage = input<number>(1);
 	@Input() pageSize: number = 1;
 	@Input() totalPages: number = 1;

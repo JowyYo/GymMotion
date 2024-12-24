@@ -24,9 +24,9 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 
 	paginatedList!: IPagination<IEjercicio>;
 	tableColumns: ITableColumn[] = [
-		{ field: "name", header: "Name" },
-		{ field: "description", header: "Description" },
-		{ field: "group", header: "Group" },
+		{ field: "name", header: "Name", widthPercentage: 20 },
+		{ field: "description", header: "Description", widthPercentage: 50 },
+		{ field: "group", header: "Group", widthPercentage: 20 },
 	]
 	apiSuscription?: Subscription;
 	isLoading: boolean = false;
@@ -67,7 +67,6 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 	}
 
 	confirmDeleteEjercicio() {
-		console.log("confirmar eliminar ejercicio")
 		this._apiService.delete("ejercicios", this.ejercicioToDelete!)
 			.subscribe(
 				() => { 
