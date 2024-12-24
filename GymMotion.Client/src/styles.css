@@ -182,3 +182,26 @@ main {
 .text-danger {
     color: red;
 }
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+fa-icon {
+    cursor: pointer;
+}
+
+.buttons-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.buttons-header > fa-icon {
+    font-size: 20px;
+}
+
+.buttons-header > button {
+    position: absolute;
+    right: 0;
+}

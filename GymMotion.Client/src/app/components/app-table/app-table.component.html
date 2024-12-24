@@ -1,20 +1,24 @@
 <table class="table table-hover">
-    <thead>
-      <tr>
-        @for (column of columns; track column.header) {
-          <th>{{ column.header }}</th>
-        }
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (row of data; track row.id) {
-        <tr>
-          @for (column of columns; track column.header) {
-            <td>{{ row[column.field] }}</td>
-          }
-          <td><fa-icon [icon]="faPencil" (click)="onGoToDetails(row['id'])"></fa-icon></td>
-        </tr>
-      }
-    </tbody>
+	<thead>
+		<tr>
+			@for (column of columns; track column.header) {
+				<th>{{ column.header }}</th>
+			}
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (row of data; track row.id) {
+			<tr (click)="onGoToDetails(row['id'])">
+				@for (column of columns; track column.header) {
+					<td>{{ getColumnValue(row[column.field]) }}</td>
+				}
+				<td>
+					<fa-icon [icon]="faTrash"
+						class="margin-left-10"
+						(click)="onDeleteRegister($event, row['id'])" />
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
