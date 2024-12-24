@@ -76,7 +76,25 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	save() {
-		this.ejercicioId == "new" ? this.addEjercicio() : this.updateEjercicio();
+		this.showAlert = false;
+
+		if (this.ejercicioForm.valid) {
+			this.ejercicioId == "new" ? this.addEjercicio() : this.updateEjercicio();
+		} else {
+			this.markFormFieldsAsTouched();
+			this.alertMessage = "Hay campos obligatorios sin informar."
+			this.alertType = "danger";
+			this.showAlert = true;
+		}
+	}
+
+	markFormFieldsAsTouched() {
+		Object.keys(this.ejercicioForm.controls).forEach(field => {
+			const control = this.ejercicioForm.get(field);
+			if (control) {
+			  control.markAsTouched();
+			}
+		});
 	}
 
 	addEjercicio() {
