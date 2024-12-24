@@ -13,8 +13,8 @@ export class ApiService {
 	
 	private _http = inject(HttpClient);
 	
-	getAll(path: string): Observable<any> {
-		return this._http.get(`${this.baseUrl}/${path}`);
+	getAll(path: string, page?: number): Observable<any> {
+		return this._http.get(`${this.baseUrl}/${path}${page ? "?page=" + page : ""}`);
 	}
 
 	getById(path: string, id: string): Observable<any> {
