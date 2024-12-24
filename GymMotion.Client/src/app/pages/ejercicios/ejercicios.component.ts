@@ -9,10 +9,12 @@ import { Subscription } from 'rxjs';
 import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
 import { AppModalComponent } from '../../components/app-modal/app-modal.component';
 import { AppAlertComponent } from '../../components/app-alert/app-alert.component';
+import { IPagination } from '../../models/pagination.model';
+import { AppPaginationComponent } from '../../components/app-pagination/app-pagination.component';
 
 @Component({
   selector: 'app-ejercicios',
-  imports: [ CommonModule, AppTableComponent, RouterModule, PageLoadingComponent, AppModalComponent, AppAlertComponent ],
+  imports: [ CommonModule, AppTableComponent, RouterModule, PageLoadingComponent, AppModalComponent, AppAlertComponent, AppPaginationComponent ],
   templateUrl: './ejercicios.component.html',
   styleUrl: './ejercicios.component.css'
 })
@@ -20,7 +22,7 @@ import { AppAlertComponent } from '../../components/app-alert/app-alert.componen
 export class EjerciciosComponent implements OnInit, OnDestroy {
 	@ViewChild(AppModalComponent) appModalComponent!: AppModalComponent
 
-	ejerciciosList: IEjercicio[] = []
+	paginatedList!: IPagination<IEjercicio>;
 	tableColumns: ITableColumn[] = [
 		{ field: "name", header: "Name" },
 		{ field: "description", header: "Description" },
@@ -40,7 +42,7 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 		this.isLoading = true;
 		this.apiSuscription = this._apiService.getAll("ejercicios").subscribe(
 			(result) => {
-				this.ejerciciosList = result;
+				this.paginatedList = result;
 				this.isLoading = false;
 			},
 			(error) => {
@@ -69,13 +71,27 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 		this._apiService.delete("ejercicios", this.ejercicioToDelete!)
 			.subscribe(
 				() => { 
+					this.showAlert = false;
 					window.location.reload();
 				},
 				error => { 
-					this.showAlert = true;
+					this.showAlert = true; 
 					this.alertType = "danger";
 					this.alertMessage = error.message;
 				}
 			);
+	}
+
+	setPage(page: number) {
+		this._apiService.getAll("ejercicios", page).subscribe(
+			(result) => {
+				this.paginatedList = result;
+				this.isLoading = false;
+			},
+			(error) => {
+				console.log(error)
+				this.isLoading = false;
+			}
+		);
 	}
 }

@@ -19,7 +19,7 @@ export class AppTableComponent {
 	enumTypes = [ GrupoMuscular ]
 
 	@Input({required: true}) columns: ITableColumn[] = []
-	@Input({required: true}) data: any[] = []
+	@Input({required: true}) data?: any[] = []
 	
 	@Output() goToDetails = new EventEmitter<string>();
 	@Output() deleteRegister = new EventEmitter<string>();

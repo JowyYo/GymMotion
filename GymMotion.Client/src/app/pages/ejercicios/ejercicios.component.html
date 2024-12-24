@@ -10,9 +10,16 @@
 </div>
 
 <app-table [columns]="tableColumns" 
-  [data]="ejerciciosList"
+  [data]="paginatedList.items"
   (goToDetails)="goToEjercicioDetails($event)"
   (deleteRegister)="deleteEjercicio($event)"
+/>
+<app-pagination 
+	[currentPage]="paginatedList.page" 
+	[totalPages]="paginatedList.totalPages" 
+	[totalItems]="paginatedList.totalItems" 
+	[pageSize]="paginatedList.pageSize" 
+	(onSetPage)="setPage($event)"
 />
 
 <app-page-loading [isLoading]="isLoading" />
