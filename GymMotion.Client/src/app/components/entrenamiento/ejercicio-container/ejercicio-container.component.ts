@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SerieContainerComponent } from '../serie-container/serie-container.component';
 
 @Component({
 	selector: 'app-ejercicio-container',
-	imports: [ CommonModule, ReactiveFormsModule ],
+	imports: [ CommonModule, ReactiveFormsModule, SerieContainerComponent ],
 	templateUrl: './ejercicio-container.component.html',
 	styleUrl: './ejercicio-container.component.css'
 })
