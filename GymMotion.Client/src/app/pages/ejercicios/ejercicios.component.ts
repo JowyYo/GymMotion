@@ -31,8 +31,9 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 	apiSuscription?: Subscription;
 	isLoading: boolean = false;
 	ejercicioToDelete?: string;
-	alertType: string = "success";
-	alertMessage: string = "Se ha guardado correctamente";
+	
+	alertType: string = "";
+	alertMessage: string = "";
 	showAlert: boolean = false;
 
 	private _router = inject(Router);

@@ -11,11 +11,11 @@
 		<div class="mb-3">
 			<label for="name" class="form-label">Nombre *</label>
 			<input type="text" 
-				[ngClass]="{'is-invalid': hasErrors('name', 'required')}"
+				[ngClass]="{'is-invalid': _sharedService.hasErrors(ejercicioForm, 'name', 'required')}"
 				class="form-control" 
 				id="name" 
 				formControlName="name">
-			@if (hasErrors('name', 'required')){
+			@if (_sharedService.hasErrors(ejercicioForm, 'name', 'required')){
 				<span class="text-danger">Nombre es obligatorio</span>
 			}
 		</div>
@@ -28,7 +28,7 @@
 		<div class="mb-3">
 			<label class="form-label" for="group">Grupo muscular *</label>
 			<select class="form-select" 
-				[ngClass]="{'is-invalid': hasErrors('group', 'required')}"
+				[ngClass]="{'is-invalid': _sharedService.hasErrors(ejercicioForm, 'group', 'required')}"
 				name="group" 
 				id="group" 
 				formControlName="group">
@@ -36,7 +36,7 @@
 				<option [value]="grupo.id">{{ grupo.name }}</option>
 				}
 			</select>
-			@if (hasErrors('group', 'required')){
+			@if (_sharedService.hasErrors(ejercicioForm, 'group', 'required')){
 				<span class="text-danger">Grupo muscular es obligatorio</span>
 			}
 		</div>

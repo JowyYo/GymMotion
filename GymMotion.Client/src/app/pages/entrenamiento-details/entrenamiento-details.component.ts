@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppAlertComponent } from '../../components/app-alert/app-alert.component';
 import { IEjercicio } from '../../models/ejercicio.model';
 import { ApiService } from '../../services/api.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-entrenamiento-details',
@@ -28,6 +29,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 
 	private _router = inject(Router)
 	private _apiService = inject(ApiService)
+	_sharedService = inject(SharedService)
 	
 	constructor(private formBuilder: FormBuilder) {
 		this.entrenamientoForm = this.formBuilder.group({

@@ -9,6 +9,7 @@ import { PageLoadingComponent } from '../../components/page-loading/page-loading
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppAlertComponent } from '../../components/app-alert/app-alert.component';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
 	selector: 'app-ejercicio-details',
@@ -36,6 +37,7 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	private _router = inject(Router);
 	private _apiService = inject(ApiService);
 	private _formBuilder = inject(FormBuilder);
+	_sharedService = inject(SharedService);
 	
 	ngOnInit(): void {
 		this.isLoading = true;
@@ -81,20 +83,11 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 		if (this.ejercicioForm.valid) {
 			this.ejercicioId == "new" ? this.addEjercicio() : this.updateEjercicio();
 		} else {
-			this.markFormFieldsAsTouched();
+			this._sharedService.markFormFieldsAsTouched(this.ejercicioForm);
 			this.alertMessage = "Hay campos obligatorios sin informar."
 			this.alertType = "danger";
 			this.showAlert = true;
 		}
-	}
-
-	markFormFieldsAsTouched() {
-		Object.keys(this.ejercicioForm.controls).forEach(field => {
-			const control = this.ejercicioForm.get(field);
-			if (control) {
-			  control.markAsTouched();
-			}
-		});
 	}
 
 	addEjercicio() {
@@ -130,9 +123,5 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 					this.alertMessage = error.message;
 				}
 			)
-	}
-
-	hasErrors(field: string, typeError: string) {
-		return this.ejercicioForm.get(field)?.hasError(typeError) && this.ejercicioForm.get(field)?.touched;
 	}
 }

@@ -11,11 +11,11 @@
 		<div class="mb-3">
 			<label for="name" class="form-label">Nombre *</label>
 			<input type="text" 
-			[ngClass]="{'is-invalid': hasErrors('name', 'required')}"
+			[ngClass]="{'is-invalid': _sharedService.hasErrors(entrenamientoForm, 'name', 'required')}"
 			class="form-control" 
 			id="name" 
 			formControlName="name">
-			@if (hasErrors('name', 'required')){
+			@if (_sharedService.hasErrors(entrenamientoForm, 'name', 'required')){
 			<span class="text-danger">Nombre es obligatorio</span>
 			}
 		</div>

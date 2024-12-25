@@ -211,3 +211,7 @@ fa-icon {
     position: absolute;
     right: 0;
 }
+
+textarea {
+    resize: none !important;
+}

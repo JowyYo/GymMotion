@@ -5,25 +5,25 @@
 			<select class="form-control" 
 				name="ejercicio"
 				id="ejercicio"
-				[ngClass]="{'is-invalid': hasErrors('ejercicio', 'required')}"
+				[ngClass]="{'is-invalid': _sharedService.hasErrors(ejercicioFormGroup, 'ejercicio', 'required')}"
 				formControlName="ejercicio">
 				<option value=""></option>
 				@for (ejercicio of ejerciciosList; track ejercicio.id) {
 					<option [value]="ejercicio.id">{{ ejercicio.name }}</option>
 				}
 			</select>
-			@if (hasErrors('ejercicio', 'required')){
+			@if (_sharedService.hasErrors(ejercicioFormGroup, 'ejercicio', 'required')){
 				<span class="text-danger">Ejercicio es obligatorio</span>
 			}
 		</div>
 		<div style="width: 45%;">
 			<label for="objetivoRepeticiones" class="form-label">Número de repeticiones objetivo *</label>
 			<input type="number" 
-				[ngClass]="{'is-invalid': hasErrors('objetivoRepeticiones', 'required')}"
+				[ngClass]="{'is-invalid': _sharedService.hasErrors(ejercicioFormGroup, 'objetivoRepeticiones', 'required')}"
 				class="form-control" 
 				id="objetivoRepeticiones" 
 				formControlName="objetivoRepeticiones">
-			@if (hasErrors('objetivoRepeticiones', 'required')){
+			@if (_sharedService.hasErrors(ejercicioFormGroup, 'objetivoRepeticiones', 'required')){
 				<span class="text-danger">Número de repeticiones objetivo es obligatorio</span>
 			}
 		</div>

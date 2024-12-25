@@ -3,22 +3,22 @@
 		<div style="width: 45%;">
 			<label for="repeticiones" class="form-label">Repeticiones *</label>
 			<input type="number" 
-				[ngClass]="{'is-invalid': hasErrors('repeticiones', 'required')}"
+				[ngClass]="{'is-invalid': _sharedService.hasErrors(serieFormGroup, 'repeticiones', 'required')}"
 				class="form-control" 
 				id="repeticiones" 
 				formControlName="repeticiones">
-			@if (hasErrors('repeticiones', 'required')){
+			@if (_sharedService.hasErrors(serieFormGroup, 'repeticiones', 'required')){
 				<span class="text-danger">Repeticiones es obligatorio</span>
 			}
 		</div>
 		<div style="width: 45%;">
 			<label for="peso" class="form-label">Peso *</label>
 			<input type="number" 
-				[ngClass]="{'is-invalid': hasErrors('peso', 'required')}"
+				[ngClass]="{'is-invalid': _sharedService.hasErrors(serieFormGroup, 'peso', 'required')}"
 				class="form-control" 
 				id="peso" 
 				formControlName="peso">
-			@if (hasErrors('peso', 'required')){
+			@if (_sharedService.hasErrors(serieFormGroup, 'peso', 'required')){
 				<span class="text-danger">Peso es obligatorio</span>
 			}
 		</div>

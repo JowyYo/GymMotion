@@ -1,7 +1,3 @@
-@if (showAlert) {
-	<app-alert [alertType]="alertType" [message]="alertMessage" (onCloseAlert)="showAlert = false"/>
-}
-
 <div class="row align-center">
 	<h2 class="col-10">Ejercicios</h2>
 	<div class="col-2">
@@ -9,11 +5,16 @@
 	</div>
 </div>
 
+@if (showAlert) {
+	<app-alert [alertType]="alertType" [message]="alertMessage" (onCloseAlert)="showAlert = false"/>
+}
+
 <app-table [columns]="tableColumns" 
   [data]="paginatedList.items"
   (goToDetails)="goToEjercicioDetails($event)"
   (deleteRegister)="deleteEjercicio($event)"
 />
+
 <app-pagination 
 	[currentPage]="paginatedList.page" 
 	[totalPages]="paginatedList.totalPages" 
