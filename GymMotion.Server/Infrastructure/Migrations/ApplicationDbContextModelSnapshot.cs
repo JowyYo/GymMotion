@@ -41,7 +41,7 @@ namespace GymMotion.Service.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ejercicios");
+                    b.ToTable("Ejercicios", (string)null);
                 });
 #pragma warning restore 612, 618
         }

@@ -4779,11 +4779,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Code\\GymMotion.Service\\GymMotion.Service.csproj",
+      "projectUniqueName": "C:\\Users\\Joneadan\\Desktop\\GymMotion\\GymMotion.Server\\GymMotion.Service.csproj",
       "projectName": "GymMotion.Service",
-      "projectPath": "C:\\Code\\GymMotion.Service\\GymMotion.Service.csproj",
+      "projectPath": "C:\\Users\\Joneadan\\Desktop\\GymMotion\\GymMotion.Server\\GymMotion.Service.csproj",
       "packagesPath": "C:\\Users\\Joneadan\\.nuget\\packages\\",
-      "outputPath": "C:\\Code\\GymMotion.Service\\obj\\",
+      "outputPath": "C:\\Users\\Joneadan\\Desktop\\GymMotion\\GymMotion.Server\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
