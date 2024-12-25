@@ -5,7 +5,7 @@ import { AppTableComponent } from '../../components/app-table/app-table.componen
 import { IEjercicio } from '../../models/ejercicio.model';
 import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
 import { AppModalComponent } from '../../components/app-modal/app-modal.component';
 import { AppAlertComponent } from '../../components/app-alert/app-alert.component';
@@ -24,9 +24,9 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 
 	paginatedList!: IPagination<IEjercicio>;
 	tableColumns: ITableColumn[] = [
-		{ field: "name", header: "Name", widthPercentage: 20 },
-		{ field: "description", header: "Description", widthPercentage: 50 },
-		{ field: "group", header: "Group", widthPercentage: 20 },
+		{ field: "name", header: "Nombre", widthPercentage: 20 },
+		{ field: "description", header: "Descripción", widthPercentage: 50 },
+		{ field: "group", header: "Grupo muscular", widthPercentage: 20 },
 	]
 	apiSuscription?: Subscription;
 	isLoading: boolean = false;
@@ -75,24 +75,30 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 					window.location.reload();
 				},
 				error => { 
-					this.showAlert = true; 
-					this.alertType = "danger";
-					this.alertMessage = error.message;
+					this.showAlertMessage("danger", error.message);
 				}
 			);
 	}
 
 	setPage(page: number) {
 		this.isLoading = true;
-		this._apiService.getAll("ejercicios/pagination", page).subscribe(
-			(result) => {
-				this.paginatedList = result;
-				this.isLoading = false;
-			},
-			(error) => {
-				console.log(error)
-				this.isLoading = false;
-			}
+		this._apiService.getAll("ejercicios/pagination", page)
+			.pipe(
+				finalize(()  => { this.isLoading = true; })
+			)
+			.subscribe(
+				(result) => {
+					this.paginatedList = result;
+				},
+				(error) => {
+					this.showAlertMessage("danger", error.message);
+				}
 		);
+	}
+	
+	showAlertMessage(type: string, message: string) {
+		this.showAlert = true;
+		this.alertType = type;
+		this.alertMessage = message;
 	}
 }

@@ -10,6 +10,7 @@ import { AppPaginationComponent } from '../../components/app-pagination/app-pagi
 import { AppModalComponent } from '../../components/app-modal/app-modal.component';
 import { IPagination } from '../../models/pagination.model';
 import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
+import { finalize } from 'rxjs';
 
 @Component({
 	selector: 'app-entrenamientos',
@@ -70,24 +71,30 @@ export class EntrenamientosComponent {
 					window.location.reload();
 				},
 				error => { 
-					this.showAlert = true; 
-					this.alertType = "danger";
-					this.alertMessage = error.message;
+					this.showAlertMessage("danger", error.message);
 				}
 			);
 	}
 
 	setPage(page: number) {
 		this.isLoading = true;
-		this._apiService.getAll("entrenamientos/pagination", page).subscribe(
-			(result) => {
-				this.paginatedList = result;
-				this.isLoading = false;
-			},
-			(error) => {
-				console.log(error)
-				this.isLoading = false;
-			}
+		this._apiService.getAll("entrenamientos/pagination", page)
+			.pipe(
+				finalize(() => { this.isLoading = false; })
+			)
+			.subscribe(
+				(result) => {
+					this.paginatedList = result;
+				},
+				(error) => {
+					this.showAlertMessage("danger", error.message);
+				}
 		);
+	}
+	
+	showAlertMessage(type: string, message: string) {
+		this.showAlert = true;
+		this.alertType = type;
+		this.alertMessage = message;
 	}
 }

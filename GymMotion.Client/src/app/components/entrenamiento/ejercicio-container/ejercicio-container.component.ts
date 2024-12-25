@@ -36,14 +36,14 @@ export class EjercicioContainerComponent {
 
 	addSerie() {
 		let serieForm = this._formBuilder.group({
-			repeticiones: [ 0, Validators.required ],
-			peso: [ 0, Validators.required ]
+			repeticiones: [ null, Validators.required ],
+			peso: [ null, Validators.required ]
 		})
 		this.series.push(serieForm);
 	}
 
 	removeSerie(serieIndex: number) {
-		console.log(serieIndex);
+		this.series.removeAt(serieIndex);
 	}
 
 	removeEjercicio() {

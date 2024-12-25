@@ -21,7 +21,7 @@ export class ApiService {
 		return this._http.get(`${this.baseUrl}/${path}/${id}`);
 	}
 
-	add(path: string, entity: any): Observable<any> {
+	create(path: string, entity: any): Observable<any> {
 		console.log(entity)
 		return this._http.post(`${this.baseUrl}/${path}`, entity);
 	}
