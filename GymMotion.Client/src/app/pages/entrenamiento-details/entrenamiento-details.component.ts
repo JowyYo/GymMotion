@@ -9,7 +9,8 @@ import { AppAlertComponent } from '../../components/app-alert/app-alert.componen
 import { IEjercicio } from '../../models/ejercicio.model';
 import { ApiService } from '../../services/api.service';
 import { SharedService } from '../../services/shared.service';
-import { finalize, of, switchMap } from 'rxjs';
+import { finalize, of, switchMap, tap } from 'rxjs';
+import { IEntrenamiento, IEntrenamientoEjercicio, ISerie } from '../../models/entrenamiento.model';
 
 @Component({
   selector: 'app-entrenamiento-details',
@@ -40,6 +41,14 @@ export class EntrenamientoDetailsComponent implements OnInit {
 		this.isLoading = true;
 		this._activatedRouter.params
 			.pipe(
+				tap(() => {
+					this._apiService.getAll("ejercicios").subscribe(
+						result => { this.ejerciciosList = result },
+						error => {
+							this.showAlertMessage("danger", `No se han podido cargar los ejercicios. ${error.message}`);
+						}
+					)
+				}),
 				switchMap(
 					params => {
 						this.entrenamientoId = params['entrenamientoId'];
@@ -52,21 +61,37 @@ export class EntrenamientoDetailsComponent implements OnInit {
 				)
 			)
 			.subscribe(
-				data => {
+				(data: IEntrenamiento) => {					
+					console.log(data)
 					this.entrenamientoForm = this._formBuilder.group({
-						name: ['', Validators.required],
-						description: [''],
-						ejercicios: this._formBuilder.array([])
+						name: [data?.name, Validators.required],
+						description: [data?.description],
+						ejercicios: this._formBuilder.array(
+							data != null ?
+							data?.ejercicios.map(
+								(ejercicio: IEntrenamientoEjercicio) => {
+									return this._formBuilder.group({
+										ejercicioId: [ejercicio?.ejercicioId, Validators.required],
+										repeticionesObjetivo: [ejercicio?.repeticionesObjetivo, Validators.required],
+										series: this._formBuilder.array(
+											ejercicio != null ?
+												ejercicio?.series.map(
+													(serie: ISerie) => {
+														return this._formBuilder.group({
+															repeticiones: [serie?.repeticiones, Validators.required],
+															peso: [serie?.peso, Validators.required]
+														})
+													}
+												) : []
+										)
+									})
+								}
+							) : []
+						)
 					});
 					this.isLoading = false;
 				}
 			)
-		this._apiService.getAll("ejercicios").subscribe(
-			result => { this.ejerciciosList = result },
-			error => {
-				this.showAlertMessage("danger", `No se han podido cargar los ejercicios. ${error.message}`);
-			}
-		)
 	}
 	
 	get ejercicios() {
@@ -75,8 +100,8 @@ export class EntrenamientoDetailsComponent implements OnInit {
 
 	addEjercicio() {
 		let ejercicioForm = this._formBuilder.group({
-			ejercicio: [ null, Validators.required ],
-			objetivoRepeticiones: [ null, Validators.required ],
+			ejercicioId: [null, Validators.required],
+			repeticionesObjetivo: [null, Validators.required],
 			series: this._formBuilder.array([])
 		})
 		this.ejercicios.push(ejercicioForm);

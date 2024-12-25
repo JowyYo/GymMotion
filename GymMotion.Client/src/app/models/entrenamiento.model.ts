@@ -7,7 +7,7 @@ export interface IEntrenamiento {
 }
 
 export interface IEntrenamientoEjercicio {
-    entrenamientoId: string,
+    ejercicioId: string,
     repeticionesObjetivo: number,
     series: ISerie[]
 }
