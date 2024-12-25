@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yQYtHEkBh64=",
+  "dgSpecHash": "JRDaX8lqdSg=",
   "success": true,
-  "projectFilePath": "C:\\Code\\GymMotion.Service\\GymMotion.Service.csproj",
+  "projectFilePath": "C:\\Users\\Joneadan\\Desktop\\GymMotion\\GymMotion.Server\\GymMotion.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Joneadan\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Joneadan\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

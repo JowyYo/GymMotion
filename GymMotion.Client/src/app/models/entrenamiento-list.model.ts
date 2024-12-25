@@ -1,5 +1,6 @@
 export interface IEntrenamientoList {
-    id: number | string,
+    id: string,
     name: string,
     description?: string
+    creationDate: Date
 }

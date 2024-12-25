@@ -1,0 +1,29 @@
+<form [formGroup]="serieFormGroup" class="g-3 needs-validation">
+	<div class="mb-3 row">
+		<div style="width: 45%;">
+			<label for="repeticiones" class="form-label">Repeticiones *</label>
+			<input type="number" 
+				[ngClass]="{'is-invalid': _sharedService.hasErrors(serieFormGroup, 'repeticiones', 'required')}"
+				class="form-control" 
+				id="repeticiones" 
+				formControlName="repeticiones">
+			@if (_sharedService.hasErrors(serieFormGroup, 'repeticiones', 'required')){
+				<span class="text-danger">Repeticiones es obligatorio</span>
+			}
+		</div>
+		<div style="width: 45%;">
+			<label for="peso" class="form-label">Peso (Kg) *</label>
+			<input type="number" 
+				[ngClass]="{'is-invalid': _sharedService.hasErrors(serieFormGroup, 'peso', 'required')}"
+				class="form-control" 
+				id="peso" 
+				formControlName="peso">
+			@if (_sharedService.hasErrors(serieFormGroup, 'peso', 'required')){
+				<span class="text-danger">Peso es obligatorio</span>
+			}
+		</div>
+        <div class="align-justify-center" style="width: 10%;">
+            <fa-icon [icon]="faTrash" (click)="removeSerie()" />
+        </div>
+	</div>
+</form>

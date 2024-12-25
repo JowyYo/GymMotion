@@ -5,8 +5,24 @@
 	</div>
 </div>
 
+@if (showAlert) {
+	<app-alert [alertType]="alertType" [message]="alertMessage" (onCloseAlert)="showAlert = false"/>
+}
+
 <app-table [columns]="tableColumns" 
-  [data]="entrenamientosList"
+  [data]="paginatedList.items"
   (goToDetails)="goToEntrenamientoDetails($event)"
   (deleteRegister)="deleteEntrenamiento($event)"
 />
+
+<app-pagination 
+	[currentPage]="paginatedList.page" 
+	[totalPages]="paginatedList.totalPages" 
+	[totalItems]="paginatedList.totalItems" 
+	[pageSize]="paginatedList.pageSize" 
+	(onSetPage)="setPage($event)"
+/>
+
+<app-page-loading [isLoading]="isLoading" />
+
+<app-modal [title]="'Eliminar entrenamiento'" [text]="'¿Está seguro/a que desea eliminar este entrenamiento?'" (onConfirmModal)="confirmDeleteEntrenamiento()" />
