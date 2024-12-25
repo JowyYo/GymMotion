@@ -61,8 +61,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 				)
 			)
 			.subscribe(
-				(data: IEntrenamiento) => {					
-					console.log(data)
+				(data: IEntrenamiento) => {
 					this.entrenamientoForm = this._formBuilder.group({
 						id: [data?.id],
 						name: [data?.name, Validators.required],

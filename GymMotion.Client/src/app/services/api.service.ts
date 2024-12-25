@@ -22,7 +22,6 @@ export class ApiService {
 	}
 
 	create(path: string, entity: any): Observable<any> {
-		console.log(entity)
 		return this._http.post(`${this.baseUrl}/${path}`, entity);
 	}
 	

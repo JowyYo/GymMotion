@@ -47,7 +47,7 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 				this.isLoading = false;
 			},
 			(error) => {
-				console.log(error)
+				this.showAlertMessage("danger", error.message);
 				this.isLoading = false;
 			}
 		);
