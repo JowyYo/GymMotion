@@ -175,6 +175,12 @@ main {
     align-items: center;
 }
 
+.align-justify-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .float-right {
     float: right;
 }

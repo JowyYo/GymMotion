@@ -27,7 +27,7 @@
 		</div>
 		<div formArrayName="ejercicios">
 			<div *ngFor="let ejercicio of ejercicios.controls; let i = index">
-			<app-ejercicio-container [ejercicioForm]="ejercicio"></app-ejercicio-container>
+				<app-ejercicio-container [ejercicioForm]="ejercicio" [ejerciciosList]="ejerciciosList" [ejercicioIndex]="i" (ejercicioToRemove)="removeEjercicio($event)"/>
 			</div>
 		</div>
 		<div class="mb-3">

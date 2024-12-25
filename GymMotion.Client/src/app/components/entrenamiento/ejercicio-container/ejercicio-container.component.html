@@ -1,17 +1,22 @@
-<form [formGroup]="ejercicioFormGroup" class="row g-3 needs-validation">
+<form [formGroup]="ejercicioFormGroup" class="g-3 needs-validation">
 	<div class="mb-3 row">
-		<div class="col-6">
-			<label for="ejercicio" class="form-label">Número de repeticiones objetivo *</label>
-			<input type="number" 
+		<div style="width: 45%;">
+			<label for="ejercicio" class="form-label">Ejercicio *</label>
+			<select class="form-control" 
+				name="ejercicio"
+				id="ejercicio"
 				[ngClass]="{'is-invalid': hasErrors('ejercicio', 'required')}"
-				class="form-control" 
-				id="ejercicio" 
 				formControlName="ejercicio">
+				<option value=""></option>
+				@for (ejercicio of ejerciciosList; track ejercicio.id) {
+					<option [value]="ejercicio.id">{{ ejercicio.name }}</option>
+				}
+			</select>
 			@if (hasErrors('ejercicio', 'required')){
-				<span class="text-danger">Número de repeticiones objetivo es obligatorio</span>
+				<span class="text-danger">Ejercicio es obligatorio</span>
 			}
 		</div>
-		<div class="col-6">
+		<div style="width: 45%;">
 			<label for="objetivoRepeticiones" class="form-label">Número de repeticiones objetivo *</label>
 			<input type="number" 
 				[ngClass]="{'is-invalid': hasErrors('objetivoRepeticiones', 'required')}"
@@ -22,37 +27,16 @@
 				<span class="text-danger">Número de repeticiones objetivo es obligatorio</span>
 			}
 		</div>
-	</div>
-	<div class="mb-3 row">
-		<div class="col-6">
-			<label for="objetivoRepeticiones" class="form-label">Número de repeticiones objetivo *</label>
-			<input type="number" 
-				[ngClass]="{'is-invalid': hasErrors('objetivoRepeticiones', 'required')}"
-				class="form-control" 
-				id="objetivoRepeticiones" 
-				formControlName="objetivoRepeticiones">
-			@if (hasErrors('objetivoRepeticiones', 'required')){
-				<span class="text-danger">Número de repeticiones objetivo es obligatorio</span>
-			}
-		</div>
-		<div class="col-6">
-			<label for="objetivoRepeticiones" class="form-label">Número de repeticiones objetivo *</label>
-			<input type="number" 
-				[ngClass]="{'is-invalid': hasErrors('objetivoRepeticiones', 'required')}"
-				class="form-control" 
-				id="objetivoRepeticiones" 
-				formControlName="objetivoRepeticiones">
-			@if (hasErrors('objetivoRepeticiones', 'required')){
-				<span class="text-danger">Número de repeticiones objetivo es obligatorio</span>
-			}
-		</div>
+        <div class="align-justify-center" style="width: 10%;">
+            <fa-icon [icon]="faTrash" (click)="removeEjercicio()" />
+        </div>
 	</div>
 	<div formArrayName="series">
 		<div *ngFor="let serie of series.controls; let i = index">
-		<app-serie-container [serieForm]="serie" />
+			<app-serie-container [serieForm]="serie" [serieIndex]="i" (serieToRemove)="removeSerie($event)" />
 		</div>
 	</div>
 	<div class="mb-3">
-		<button class="btn btn-primary">Añadir serie</button>
+		<button type="button" class="btn btn-primary" (click)="addSerie()">Añadir serie</button>
 	</div>
 </form>

@@ -40,7 +40,7 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.isLoading = true;
-		this.apiSuscription = this._apiService.getAll("ejercicios").subscribe(
+		this.apiSuscription = this._apiService.getAll("ejercicios/pagination").subscribe(
 			(result) => {
 				this.paginatedList = result;
 				this.isLoading = false;
@@ -82,7 +82,8 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 	}
 
 	setPage(page: number) {
-		this._apiService.getAll("ejercicios", page).subscribe(
+		this.isLoading = true;
+		this._apiService.getAll("ejercicios/pagination", page).subscribe(
 			(result) => {
 				this.paginatedList = result;
 				this.isLoading = false;
