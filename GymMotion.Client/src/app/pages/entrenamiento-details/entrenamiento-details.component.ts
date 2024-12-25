@@ -64,6 +64,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 				(data: IEntrenamiento) => {					
 					console.log(data)
 					this.entrenamientoForm = this._formBuilder.group({
+						id: [data?.id],
 						name: [data?.name, Validators.required],
 						description: [data?.description],
 						ejercicios: this._formBuilder.array(
@@ -71,6 +72,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 							data?.ejercicios.map(
 								(ejercicio: IEntrenamientoEjercicio) => {
 									return this._formBuilder.group({
+										id: [ejercicio?.id],
 										ejercicioId: [ejercicio?.ejercicioId, Validators.required],
 										repeticionesObjetivo: [ejercicio?.repeticionesObjetivo, Validators.required],
 										series: this._formBuilder.array(
@@ -78,6 +80,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 												ejercicio?.series.map(
 													(serie: ISerie) => {
 														return this._formBuilder.group({
+															id: [serie?.id],
 															repeticiones: [serie?.repeticiones, Validators.required],
 															peso: [serie?.peso, Validators.required]
 														})
@@ -114,7 +117,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 	save() {
 		this.showAlert = false;
 		this.isLoading = true;
-
+		
 		if (this.entrenamientoForm.valid) {
 			this.entrenamientoId == "new" ? this.createEntrenamiento() : this.updateEntrenamiento();
 		} else {
