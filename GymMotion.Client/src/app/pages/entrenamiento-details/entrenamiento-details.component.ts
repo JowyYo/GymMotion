@@ -24,10 +24,12 @@ export class EntrenamientoDetailsComponent implements OnInit, OnDestroy {
 
 	faArrowLeft = faArrowLeft;
 
+	entrenamiento?: IEntrenamiento
 	ejerciciosList: IEjercicio[] = [];
 	entrenamientoForm!: FormGroup;
 	isLoading: boolean = false;
 	entrenamientoId?: string;
+	currentDate: Date = new Date();
 
 	alertType: string = "";
 	alertMessage: string = "";
@@ -45,7 +47,7 @@ export class EntrenamientoDetailsComponent implements OnInit, OnDestroy {
 			.pipe(
 				takeUntil(this.destroy$),
 				tap(() => {
-					this._apiService.getAll("ejercicios").subscribe(
+					this._apiService.getAll("ejercicios").pipe(takeUntil(this.destroy$)).subscribe(
 						result => { this.ejerciciosList = result },
 						error => {
 							this.showAlertMessage("danger", `No se han podido cargar los ejercicios. ${error.message}`);
@@ -65,6 +67,7 @@ export class EntrenamientoDetailsComponent implements OnInit, OnDestroy {
 			)
 			.subscribe(
 				(data: IEntrenamiento) => {
+					this.entrenamiento = data;
 					this.entrenamientoForm = this._formBuilder.group({
 						id: [data?.id || EMPTY_GUID],
 						name: [data?.name, Validators.required],
@@ -126,7 +129,6 @@ export class EntrenamientoDetailsComponent implements OnInit, OnDestroy {
 		this.showAlert = false;
 		this.isLoading = true;
 		
-		console.log(this.entrenamientoForm.value)
 		if (this.entrenamientoForm.valid) {
 			this.entrenamientoId == "new" ? this.createEntrenamiento() : this.updateEntrenamiento();
 		} else {

@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, LOCALE_ID } from '@angular/core';
 import { ITableColumn } from '../../models/table-column.model'
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { GrupoMuscular } from '../../models/ejercicio.model';
 
 @Component({
@@ -27,8 +27,11 @@ export class AppTableComponent {
 	getColumnValue(value: any): string {
 		const enumData = this.findEnumType(value);
 		if (enumData) {
-		  const { enumType } = enumData;
-		  return Object.keys(enumType).find(key => enumType[key] === value) || '';
+			const { enumType } = enumData;
+			return Object.keys(enumType).find(key => enumType[key] === value) || '';
+		}
+		if (!isNaN(Date.parse(value))) {
+			return formatDate(value, 'dd/MM/yyyy', "en");
 		}
 
 		return value;

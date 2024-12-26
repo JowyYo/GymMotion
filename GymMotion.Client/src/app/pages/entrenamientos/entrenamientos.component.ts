@@ -29,7 +29,7 @@ export class EntrenamientosComponent implements OnInit, OnDestroy {
 	tableColumns: ITableColumn[] = [
 		{ field: "name", header: "Nombre", widthPercentage: 20 },
 		{ field: "description", header: "Descripción", widthPercentage: 50 },
-		{ field: "creationDate", header: "Fecha de creación", widthPercentage: 20 }
+		{ field: "createdDate", header: "Fecha de creación", widthPercentage: 20 }
 	];
 	isLoading: boolean = false;
 	entrenamientoToDelete?: string;
@@ -71,13 +71,14 @@ export class EntrenamientosComponent implements OnInit, OnDestroy {
 
 	confirmDeleteEntrenamiento() {
 		this._apiService.delete("entrenamientos", this.entrenamientoToDelete!)
+			.pipe(takeUntil(this.destroy$))
 			.subscribe(
 				() => { 
 					this.showAlert = false;
 					window.location.reload();
 				},
 				error => { 
-					this.showAlertMessage("danger", error.message);
+					this.showAlertMessage("danger", error.error);
 				}
 			);
 	}
@@ -86,6 +87,7 @@ export class EntrenamientosComponent implements OnInit, OnDestroy {
 		this.isLoading = true;
 		this._apiService.getAll("entrenamientos/pagination", page)
 			.pipe(
+				takeUntil(this.destroy$),
 				finalize(() => { this.isLoading = false; })
 			)
 			.subscribe(
@@ -93,7 +95,7 @@ export class EntrenamientosComponent implements OnInit, OnDestroy {
 					this.paginatedList = result;
 				},
 				(error) => {
-					this.showAlertMessage("danger", error.message);
+					this.showAlertMessage("danger", error.error);
 				}
 		);
 	}
