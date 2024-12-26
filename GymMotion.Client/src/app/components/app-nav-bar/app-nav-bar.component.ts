@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Event, NavigationEnd, Router, RouterModule } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,11 +12,11 @@ import { Observable, Subscription } from 'rxjs';
 export class AppNavBarComponent implements OnInit, OnDestroy {
 
   activePage: string = '';
-  private routerSubscription: Subscription = new Subscription;
+  private destroy$ = new Subject<void>();
   private _router = inject(Router)
   
   ngOnInit(): void {
-    this.routerSubscription = this._router.events.subscribe(
+    this._router.events.pipe(takeUntil(this.destroy$)).subscribe(
       event => {
         if (event instanceof NavigationEnd)
           this.activePage = event.url.split('/')[1];
@@ -25,7 +25,7 @@ export class AppNavBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.routerSubscription)
-      this.routerSubscription.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

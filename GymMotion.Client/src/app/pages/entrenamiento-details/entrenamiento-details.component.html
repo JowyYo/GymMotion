@@ -8,16 +8,22 @@
 			<fa-icon [icon]="faArrowLeft" (click)="_sharedService.goToPath('/entrenamientos')"></fa-icon>
 			<button type="submit" class="btn btn-primary float-right">Guardar</button>
 		</div>
-		<div class="mb-3">
-			<label for="name" class="form-label">Nombre *</label>
-			<input type="text" 
-			[ngClass]="{'is-invalid': _sharedService.hasErrors(entrenamientoForm, 'name', 'required')}"
-			class="form-control" 
-			id="name" 
-			formControlName="name">
-			@if (_sharedService.hasErrors(entrenamientoForm, 'name', 'required')){
-			<span class="text-danger">Nombre es obligatorio</span>
-			}
+		<div class="mb-3 row">
+			<div class="col-6">
+				<label for="name" class="form-label">Nombre *</label>
+				<input type="text" 
+					[ngClass]="{'is-invalid': _sharedService.hasErrors(entrenamientoForm, 'name', 'required')}"
+					class="form-control" 
+					id="name" 
+					formControlName="name">
+				@if (_sharedService.hasErrors(entrenamientoForm, 'name', 'required')){
+					<span class="text-danger">Nombre es obligatorio</span>
+				}
+			</div>
+			<div class="col-6">
+				<label for="createdDate" class="form-label">Fecha de creación</label>
+				<p id="createdDate" style="font-weight: 500;">{{ (entrenamiento != null ? entrenamiento!.createdDate : currentDate) | date: 'dd/MM/yyyy' }}</p>
+			</div>
 		</div>
 		<div class="mb-3">
 			<label for="description" class="form-label">Descripción</label>

@@ -2,7 +2,7 @@ export interface IEntrenamiento {
     id: string,
     name: string,
     description?: string
-    creationDate: Date,
+    createdDate: Date,
     ejercicios: IEntrenamientoEjercicio[]
 }
 

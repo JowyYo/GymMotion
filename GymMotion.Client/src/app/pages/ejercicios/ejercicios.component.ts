@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ITableColumn } from '../../models/table-column.model';
 import { AppTableComponent } from '../../components/app-table/app-table.component';
 import { IEjercicio } from '../../models/ejercicio.model';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { finalize, Subscription } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
 import { AppModalComponent } from '../../components/app-modal/app-modal.component';
 import { AppAlertComponent } from '../../components/app-alert/app-alert.component';
 import { IPagination } from '../../models/pagination.model';
 import { AppPaginationComponent } from '../../components/app-pagination/app-pagination.component';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-ejercicios',
@@ -28,7 +29,6 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 		{ field: "description", header: "Descripción", widthPercentage: 50 },
 		{ field: "group", header: "Grupo muscular", widthPercentage: 20 },
 	]
-	apiSuscription?: Subscription;
 	isLoading: boolean = false;
 	ejercicioToDelete?: string;
 	
@@ -36,12 +36,13 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 	alertMessage: string = "";
 	showAlert: boolean = false;
 
-	private _router = inject(Router);
+	private destroy$ = new Subject<void>();
 	private _apiService = inject(ApiService);
+	private _sharedService = inject(SharedService);
 
 	ngOnInit() {
 		this.isLoading = true;
-		this.apiSuscription = this._apiService.getAll("ejercicios/pagination").subscribe(
+		this._apiService.getAll("ejercicios/pagination").pipe(takeUntil(this.destroy$)).subscribe(
 			(result) => {
 				this.paginatedList = result;
 				this.isLoading = false;
@@ -54,12 +55,12 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
-		if (this.apiSuscription)
-			this.apiSuscription.unsubscribe();
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 	
 	goToEjercicioDetails(id: string): void {
-		this._router.navigate([`/ejercicios/${id}`])
+		this._sharedService.goToPath(`/ejercicios/${id}`)
 	}
 
 	deleteEjercicio(id: string) {
@@ -69,6 +70,7 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 
 	confirmDeleteEjercicio() {
 		this._apiService.delete("ejercicios", this.ejercicioToDelete!)
+			.pipe(takeUntil(this.destroy$))
 			.subscribe(
 				() => { 
 					this.showAlert = false;
@@ -84,6 +86,7 @@ export class EjerciciosComponent implements OnInit, OnDestroy {
 		this.isLoading = true;
 		this._apiService.getAll("ejercicios/pagination", page)
 			.pipe(
+				takeUntil(this.destroy$),
 				finalize(()  => { this.isLoading = true; })
 			)
 			.subscribe(

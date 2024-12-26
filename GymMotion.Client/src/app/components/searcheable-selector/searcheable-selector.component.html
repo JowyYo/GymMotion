@@ -1,0 +1,20 @@
+<div class="searcheable-select">
+    <input
+        type="text"
+        [(ngModel)]="searchText"
+        (input)="searchOptions()"
+        (focus)="showDropdown()"        
+        class="form-control"
+        [ngClass]="inputClass"
+    />
+    @if(dropdownVisible) {
+        <ul class="options-list">
+            @for (option of filteredOptions; track option.key) {
+                <li (click)="selectOption(option)" [class.selected]="option.key === selectedOption?.key">
+                    {{ option.value }}
+                </li>
+            }
+        </ul>
+    }
+</div>
+  

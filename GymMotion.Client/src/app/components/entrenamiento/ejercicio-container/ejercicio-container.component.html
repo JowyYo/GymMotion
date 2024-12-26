@@ -2,17 +2,23 @@
 	<div class="mb-3 row">
 		<div style="width: 45%;">
 			<label for="ejercicio" class="form-label">Ejercicio *</label>
-			<select class="form-control" 
+			<app-searcheable-selector
+				[options]="ejercicioOptions"
+				[selectedOptionKey]="selectedEjercicio"
+				[inputClass]="_sharedService.hasErrors(ejercicioFormGroup, 'ejercicioId', 'required') ? 'is-invalid' : ''"
+				(optionChange)="ejercicioOptionChange($event)"
+			/>
+			<!-- <select class="form-control" 
 				name="ejercicio"
 				id="ejercicio"
-				[ngClass]="{'is-invalid': _sharedService.hasErrors(ejercicioFormGroup, 'ejercicio', 'required')}"
+				[ngClass]="{'is-invalid': _sharedService.hasErrors(ejercicioFormGroup, 'ejercicioId', 'required')}"
 				formControlName="ejercicioId">
 				<option value=""></option>
 				@for (ejercicio of ejerciciosList; track ejercicio.id) {
 					<option [value]="ejercicio.id">{{ ejercicio.name }}</option>
 				}
-			</select>
-			@if (_sharedService.hasErrors(ejercicioFormGroup, 'ejercicio', 'required')){
+			</select> -->
+			@if (_sharedService.hasErrors(ejercicioFormGroup, 'ejercicioId', 'required')){
 				<span class="text-danger">Ejercicio es obligatorio</span>
 			}
 		</div>
