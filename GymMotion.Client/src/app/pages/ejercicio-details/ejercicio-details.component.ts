@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { GrupoMuscular } from '../../models/ejercicio.model';
-import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, of, Subscription, switchMap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { finalize, of, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
@@ -33,6 +33,7 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	alertMessage: string = "";
 	showAlert: boolean = false;
 
+	private destroy$ = new Subject<void>();
 	private _activatedRouter = inject(ActivatedRoute);
 	private _apiService = inject(ApiService);
 	private _formBuilder = inject(FormBuilder);
@@ -40,8 +41,9 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	
 	ngOnInit(): void {
 		this.isLoading = true;
-		this.paramsSubscription = this._activatedRouter.params
+		this._activatedRouter.params
 			.pipe(
+				takeUntil(this.destroy$),
 				switchMap(
 					params => {
 						this.ejercicioId = params['ejercicioId'];
@@ -66,10 +68,8 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	}
 	
 	ngOnDestroy(): void {
-		if (this.paramsSubscription)
-			this.paramsSubscription.unsubscribe();
-		if (this.apiServiceSubscription)
-			this.apiServiceSubscription.unsubscribe();
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 
 	save() {
@@ -89,6 +89,7 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	createEjercicio() {
 		this._apiService.create('ejercicios', this.ejercicioForm?.value)
 			.pipe(
+				takeUntil(this.destroy$),
 				finalize(() => { this.isLoading = false; })
 			)
 			.subscribe(
@@ -106,6 +107,7 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	updateEjercicio() {
 		this._apiService.update('ejercicios', this.ejercicioId!, this.ejercicioForm?.value)
 			.pipe(
+				takeUntil(this.destroy$),
 				finalize(() => { this.isLoading = false; })
 			)
 			.subscribe(

@@ -6,6 +6,7 @@ import { IEjercicio } from '../../../models/ejercicio.model';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedService } from '../../../services/shared.service';
+import { NIL as EMPTY_GUID } from 'uuid';
 
 @Component({
 	selector: 'app-ejercicio-container',
@@ -36,6 +37,7 @@ export class EjercicioContainerComponent {
 
 	addSerie() {
 		let serieForm = this._formBuilder.group({
+			id: [EMPTY_GUID],
 			repeticiones: [ null, Validators.required ],
 			peso: [ null, Validators.required ]
 		})

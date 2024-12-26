@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, ViewChild } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ITableColumn } from '../../models/table-column.model';
 import { IEntrenamientoList } from '../../models/entrenamiento-list.model';
 import { AppTableComponent } from '../../components/app-table/app-table.component';
@@ -10,7 +10,8 @@ import { AppPaginationComponent } from '../../components/app-pagination/app-pagi
 import { AppModalComponent } from '../../components/app-modal/app-modal.component';
 import { IPagination } from '../../models/pagination.model';
 import { PageLoadingComponent } from '../../components/page-loading/page-loading.component';
-import { finalize } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
 	selector: 'app-entrenamientos',
@@ -19,7 +20,9 @@ import { finalize } from 'rxjs';
 	styleUrl: './entrenamientos.component.css'
 })
 
-export class EntrenamientosComponent {
+export class EntrenamientosComponent implements OnInit, OnDestroy {
+	private destroy$ = new Subject<void>();
+
 	@ViewChild(AppModalComponent) appModalComponent!: AppModalComponent
 	
 	paginatedList!: IPagination<IEntrenamientoList>;
@@ -36,26 +39,29 @@ export class EntrenamientosComponent {
 	showAlert: boolean = false;
 
 	private _apiService = inject(ApiService)
-	private _router = inject(Router)
+	_sharedService = inject(SharedService)
 
 	ngOnInit() {
 		this.isLoading = true;
-		this._apiService.getAll("entrenamientos/pagination").subscribe(
+		this._apiService.getAll("entrenamientos/pagination").pipe(takeUntil(this.destroy$)).subscribe(
 			result => {
 				this.paginatedList = result;
 				this.isLoading = false;
 			},
 			error => {
+				this.showAlertMessage("danger", `No se han podido cargar los entrenamientos. ${error.message}`);
 				this.isLoading = false;
-				this.showAlert = true;
-				this.alertType = "danger";
-				this.alertMessage = `No se han podido cargar los entrenamientos. ${error.message}`
 			}
 		)
 	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
 	
 	goToEntrenamientoDetails(id: string): void {
-		this._router.navigate([`/entrenamientos/${id}`])
+		this._sharedService.goToPath(`/entrenamientos/${id}`);
 	}
 
 	deleteEntrenamiento(id: string): void {

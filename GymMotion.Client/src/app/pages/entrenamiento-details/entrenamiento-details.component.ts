@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EjercicioContainerComponent } from '../../components/entrenamiento/ejercicio-container/ejercicio-container.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppAlertComponent } from '../../components/app-alert/app-alert.component';
 import { IEjercicio } from '../../models/ejercicio.model';
 import { ApiService } from '../../services/api.service';
 import { SharedService } from '../../services/shared.service';
-import { finalize, of, switchMap, tap } from 'rxjs';
+import { finalize, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { IEntrenamiento, IEntrenamientoEjercicio, ISerie } from '../../models/entrenamiento.model';
+import { NIL as EMPTY_GUID } from 'uuid';
 
 @Component({
   selector: 'app-entrenamiento-details',
@@ -19,7 +20,7 @@ import { IEntrenamiento, IEntrenamientoEjercicio, ISerie } from '../../models/en
   styleUrl: './entrenamiento-details.component.css'
 })
 
-export class EntrenamientoDetailsComponent implements OnInit {
+export class EntrenamientoDetailsComponent implements OnInit, OnDestroy {
 
 	faArrowLeft = faArrowLeft;
 
@@ -32,6 +33,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 	alertMessage: string = "";
 	showAlert: boolean = false;
 
+	destroy$ = new Subject<void>();
 	private _activatedRouter = inject(ActivatedRoute);
 	private _apiService = inject(ApiService)
 	private _formBuilder = inject(FormBuilder);
@@ -41,6 +43,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 		this.isLoading = true;
 		this._activatedRouter.params
 			.pipe(
+				takeUntil(this.destroy$),
 				tap(() => {
 					this._apiService.getAll("ejercicios").subscribe(
 						result => { this.ejerciciosList = result },
@@ -63,7 +66,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 			.subscribe(
 				(data: IEntrenamiento) => {
 					this.entrenamientoForm = this._formBuilder.group({
-						id: [data?.id],
+						id: [data?.id || EMPTY_GUID],
 						name: [data?.name, Validators.required],
 						description: [data?.description],
 						ejercicios: this._formBuilder.array(
@@ -71,7 +74,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 							data?.ejercicios.map(
 								(ejercicio: IEntrenamientoEjercicio) => {
 									return this._formBuilder.group({
-										id: [ejercicio?.id],
+										id: [ejercicio?.id || EMPTY_GUID],
 										ejercicioId: [ejercicio?.ejercicioId, Validators.required],
 										repeticionesObjetivo: [ejercicio?.repeticionesObjetivo, Validators.required],
 										series: this._formBuilder.array(
@@ -79,7 +82,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 												ejercicio?.series.map(
 													(serie: ISerie) => {
 														return this._formBuilder.group({
-															id: [serie?.id],
+															id: [serie?.id || EMPTY_GUID],
 															repeticiones: [serie?.repeticiones, Validators.required],
 															peso: [serie?.peso, Validators.required]
 														})
@@ -95,6 +98,11 @@ export class EntrenamientoDetailsComponent implements OnInit {
 				}
 			)
 	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
 	
 	get ejercicios() {
 		return (this.entrenamientoForm.get('ejercicios') as FormArray)
@@ -102,6 +110,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 
 	addEjercicio() {
 		let ejercicioForm = this._formBuilder.group({
+			id: [EMPTY_GUID],
 			ejercicioId: [null, Validators.required],
 			repeticionesObjetivo: [null, Validators.required],
 			series: this._formBuilder.array([])
@@ -117,6 +126,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 		this.showAlert = false;
 		this.isLoading = true;
 		
+		console.log(this.entrenamientoForm.value)
 		if (this.entrenamientoForm.valid) {
 			this.entrenamientoId == "new" ? this.createEntrenamiento() : this.updateEntrenamiento();
 		} else {
@@ -130,6 +140,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 	createEntrenamiento() {
 		this._apiService.create('entrenamientos', this.entrenamientoForm?.value)
 			.pipe(
+				takeUntil(this.destroy$),
 				finalize(() => { this.isLoading = false; })
 			)
 			.subscribe(
@@ -139,7 +150,8 @@ export class EntrenamientoDetailsComponent implements OnInit {
 					setTimeout(() => { this.showAlert = false; }, 1500);
 				},
 				error => {
-					this.showAlertMessage("danger", error.message);
+					console.log(error)
+					this.showAlertMessage("danger", error.error);
 				}
 			)
 	}
@@ -147,6 +159,7 @@ export class EntrenamientoDetailsComponent implements OnInit {
 	updateEntrenamiento() {
 		this._apiService.update('entrenamientos', this.entrenamientoId!, this.entrenamientoForm?.value)
 			.pipe(
+				takeUntil(this.destroy$),
 				finalize(() => { this.isLoading = false; })
 			)
 			.subscribe(
@@ -155,7 +168,8 @@ export class EntrenamientoDetailsComponent implements OnInit {
 					setTimeout(() => { this.showAlert = false; }, 1500);
 				},
 				error => {
-					this.showAlertMessage("danger", error.message);
+					console.log(error)
+					this.showAlertMessage("danger", error.error);
 				}
 			)
 	}
