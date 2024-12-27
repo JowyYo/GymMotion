@@ -1,0 +1,22 @@
+<div class="menu-lateral" [class.collapsed]="collapsed">
+    <button (click)="collapsed =! collapsed">☰</button>
+    <nav>
+      <a [ngClass]="{'active': activePage == ''}"
+        [routerLink]="['/']">
+            <fa-icon [icon]="faHome" /><span *ngIf="!collapsed" class="margin-left-10">Home</span>            
+      </a>
+      <a [ngClass]="{'active': activePage == 'entrenamientos'}"
+        [routerLink]="['/entrenamientos']">
+        <fa-icon [icon]="faList" /><span *ngIf="!collapsed" class="margin-left-10">Entrenamientos</span>
+      </a>
+      <a [ngClass]="{'active': activePage == 'ejercicios'}"
+        [routerLink]="['/ejercicios']">
+        <fa-icon [icon]="faDumbbell" /><span *ngIf="!collapsed" class="margin-left-10">Ejercicios</span>
+      </a>
+    </nav>
+  </div>
+  <div class="app-content">
+    <ng-content></ng-content>
+  </div>
+  
+  

@@ -1,0 +1,51 @@
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #333;
+    color: white;
+    overflow: hidden;
+    transition: width 0.3s;
+}
+
+.menu-lateral.collapsed {
+    width: 60px;
+}
+
+nav a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+nav a.active {
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #555;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.app-content {
+    margin-left: 200px;
+    transition: margin-left 0.3s;
+}
+
+.menu-lateral.collapsed + .app-content {
+    margin-left: 60px;
+}
