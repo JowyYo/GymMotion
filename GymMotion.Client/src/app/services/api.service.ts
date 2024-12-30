@@ -1,15 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   
-	baseUrl: string = "http://localhost:5055/api";
-	headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+	baseUrl: string = "http://localhost:5055";
 	
 	private _http = inject(HttpClient);
 	
@@ -21,11 +19,11 @@ export class ApiService {
 		return this._http.get(`${this.baseUrl}/${path}/${id}`);
 	}
 
-	create(path: string, entity: any): Observable<any> {
+	post(path: string, entity: any): Observable<any> {
 		return this._http.post(`${this.baseUrl}/${path}`, entity);
 	}
 	
-	update(path: string, id: string, entity: any): Observable<any> {
+	put(path: string, id: string, entity: any): Observable<any> {
 		return this._http.put(`${this.baseUrl}/${path}/${id}`, entity);
 	}
 

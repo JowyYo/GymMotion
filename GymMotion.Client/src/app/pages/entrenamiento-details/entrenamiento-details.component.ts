@@ -140,7 +140,7 @@ export class EntrenamientoDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	createEntrenamiento() {
-		this._apiService.create('entrenamientos', this.entrenamientoForm?.value)
+		this._apiService.post('entrenamientos', this.entrenamientoForm?.value)
 			.pipe(
 				takeUntil(this.destroy$),
 				finalize(() => { this.isLoading = false; })
@@ -159,7 +159,7 @@ export class EntrenamientoDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	updateEntrenamiento() {
-		this._apiService.update('entrenamientos', this.entrenamientoId!, this.entrenamientoForm?.value)
+		this._apiService.put('entrenamientos', this.entrenamientoId!, this.entrenamientoForm?.value)
 			.pipe(
 				takeUntil(this.destroy$),
 				finalize(() => { this.isLoading = false; })

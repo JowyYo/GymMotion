@@ -87,7 +87,7 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	createEjercicio() {
-		this._apiService.create('ejercicios', this.ejercicioForm?.value)
+		this._apiService.post('ejercicios', this.ejercicioForm?.value)
 			.pipe(
 				takeUntil(this.destroy$),
 				finalize(() => { this.isLoading = false; })
@@ -105,7 +105,7 @@ export class EjercicioDetailsComponent implements OnInit, OnDestroy {
 	}
 
 	updateEjercicio() {
-		this._apiService.update('ejercicios', this.ejercicioId!, this.ejercicioForm?.value)
+		this._apiService.put('ejercicios', this.ejercicioId!, this.ejercicioForm?.value)
 			.pipe(
 				takeUntil(this.destroy$),
 				finalize(() => { this.isLoading = false; })

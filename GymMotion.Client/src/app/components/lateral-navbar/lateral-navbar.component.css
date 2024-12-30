@@ -49,3 +49,7 @@ button {
 .menu-lateral.collapsed + .app-content {
     margin-left: 60px;
 }
+
+.app-content.full {
+    margin-left: 0px;
+}
